@@ -1,0 +1,115 @@
+syntax = 'proto3';
+
+package ar.edu.utn.frre.dacs.bar;
+
+option go_package = "dacs/bar";
+import "google/api/annotations.proto";
+
+// Bar message
+message Bar {
+    // Id of the bar
+  int64 id = 1;
+
+  // Name of the Bar
+  string name  = 2;
+
+  // Description of the Bar
+  string description  = 3;
+}
+
+// BarService handles bars in the system
+service BarService {
+  // Creates a new Bar in the system
+  rpc CreateBar(CreateBarRequest) returns (CreateBarResponse) {
+    option (google.api.http) = {
+      post: "/v1/bars"
+      body: "bar"
+    };
+  }
+
+  // List the bars in the system
+  rpc ListBars(ListBarsRequest) returns (ListBarsResponse) {
+    option (google.api.http) = {
+      get: "/v1/bars"
+    };
+  }
+
+  // Get an existing bars 
+  rpc GetBar(GetBarRequest) returns (GetBarResponse) {
+    option (google.api.http) = {
+      get: "/v1/bars/{id}"
+    };
+  }
+
+  // Updates an existing bars 
+  rpc UpdateBar(UpdateBarRequest) returns (UpdateBarResponse) {
+    option (google.api.http) = {
+      put: "/v1/bars/{id}"
+      body: "bar"
+    };
+  }
+
+  // Deletes an existing bar
+  rpc DeleteBar(DeleteBarRequest) returns (DeleteBarResponse) {
+    option (google.api.http) = {
+      delete: "/v1/bars/{id}"
+    };
+  }
+}
+
+// CreateBarRequest is a request for creating a Bar
+message CreateBarRequest {
+  // Bar to create
+  Bar bar = 1;
+}
+
+// CreateBarResponse is the response after creating a Bar
+message CreateBarResponse {
+  // Created bar
+  Bar bar = 1;
+}
+
+// ListBarsRequest is a request for listing bars
+message ListBarsRequest {
+}
+
+// ListBarsResponse contains the list of bars found
+message ListBarsResponse {
+  repeated Bar bars = 1;
+}
+
+// GetBarRequest is a request for getting an existing bar
+message GetBarRequest {
+  // Id of the bar
+  int64 id = 1;
+}
+
+// GetBarResponse contains the response with an existing bar
+message GetBarResponse {
+  // Found bar
+  Bar bar = 1;
+}
+
+// UpdateBarRequest is a request for updating an existing bar
+message UpdateBarRequest {
+  // Id of the bar
+  int64 id = 1;
+  // Bar to update
+  Bar bar = 2;
+}
+
+// UpdateBarResponse contains the response with the updated bar
+message UpdateBarResponse {
+  // Updated bar
+  Bar bar = 1;
+}
+
+// DeleteBarRequest is a request for deleteing an existing bar
+message DeleteBarRequest {
+  // Id of the bar
+  int64 id = 1;
+}
+
+// DeleteBarResponse contains the response of the delete operation
+message DeleteBarResponse {
+}

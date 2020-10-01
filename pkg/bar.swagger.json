@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "bar.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/bars": {
+      "get": {
+        "summary": "List the bars in the system",
+        "operationId": "ListBars",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/barListBarsResponse"
+            }
+          }
+        },
+        "tags": [
+          "BarService"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new Bar in the system",
+        "operationId": "CreateBar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/barCreateBarResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Bar to create",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/barBar"
+            }
+          }
+        ],
+        "tags": [
+          "BarService"
+        ]
+      }
+    },
+    "/v1/bars/{id}": {
+      "get": {
+        "summary": "Get an existing bars",
+        "operationId": "GetBar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/barGetBarResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Id of the bar",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BarService"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes an existing bar",
+        "operationId": "DeleteBar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/barDeleteBarResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Id of the bar",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BarService"
+        ]
+      },
+      "put": {
+        "summary": "Updates an existing bars",
+        "operationId": "UpdateBar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/barUpdateBarResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Id of the bar",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "description": "Bar to update",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/barBar"
+            }
+          }
+        ],
+        "tags": [
+          "BarService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "barBar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "Id of the bar"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the Bar"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description of the Bar"
+        }
+      },
+      "title": "Bar message"
+    },
+    "barCreateBarResponse": {
+      "type": "object",
+      "properties": {
+        "bar": {
+          "$ref": "#/definitions/barBar",
+          "title": "Created bar"
+        }
+      },
+      "title": "CreateBarResponse is the response after creating a Bar"
+    },
+    "barDeleteBarResponse": {
+      "type": "object",
+      "title": "DeleteBarResponse contains the response of the delete operation"
+    },
+    "barGetBarResponse": {
+      "type": "object",
+      "properties": {
+        "bar": {
+          "$ref": "#/definitions/barBar",
+          "title": "Found bar"
+        }
+      },
+      "title": "GetBarResponse contains the response with an existing bar"
+    },
+    "barListBarsResponse": {
+      "type": "object",
+      "properties": {
+        "bars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/barBar"
+          }
+        }
+      },
+      "title": "ListBarsResponse contains the list of bars found"
+    },
+    "barUpdateBarResponse": {
+      "type": "object",
+      "properties": {
+        "bar": {
+          "$ref": "#/definitions/barBar",
+          "title": "Updated bar"
+        }
+      },
+      "title": "UpdateBarResponse contains the response with the updated bar"
+    }
+  }
+}

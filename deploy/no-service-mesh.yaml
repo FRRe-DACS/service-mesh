@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-deploy
+  namespace: default
+  labels:
+    university: utn
+    faculty: frre
+spec:
+  selector:
+    matchLabels:
+      app: bar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bar
+    spec:
+      containers:
+        - name: bar
+          image: docker.io/frredacs/bar:0.0.1
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090
+          env:
+            - name: GRPC_PORT
+              value: "9090"
+            - name: REST_PORT
+              value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: bar
+  ports:
+    - name: http-rest
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: grpc
+      protocol: TCP
+      port: 9090
+      targetPort: 9090
