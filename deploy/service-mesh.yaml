@@ -34,7 +34,7 @@ metadata:
   name: bar
   namespace: default
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: bar
   ports:
@@ -87,7 +87,7 @@ metadata:
   name: foo
   namespace: default
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: foo
   ports:
@@ -99,3 +99,36 @@ spec:
       protocol: TCP
       port: 9090
       targetPort: 9090
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: foo-bar-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: foo-vs
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - foo-bar-gateway
+  http:
+    - match:
+        - port: 80
+      route:
+        - destination:
+            host: foo
+            port:
+              number: 9090
