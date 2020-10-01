@@ -16,17 +16,17 @@ package main
 import (
 	"fmt"
 
-	"github.com/FRRe-DACS/service-mesh/pkg/dacs/bar"
+	"github.com/FRRe-DACS/service-mesh/pkg/dacs/foo"
 	"github.com/FRRe-DACS/service-mesh/pkg/dacs/utils"
 	"go.uber.org/zap"
 )
 
 const (
 	// Default port for REST Web API
-	defaultRestPort = "8080"
+	defaultRestPort = "8081"
 
 	// Default port for gRPC API
-	defaultGpcpPort = "9090"
+	defaultGpcpPort = "9091"
 )
 
 var logger, _ = zap.NewProduction(zap.Fields(zap.String("type", "main")))
@@ -40,7 +40,7 @@ func main() {
 
 	// fire the gRPC server in a goroutine
 	go func() {
-		err := bar.StartBarGRPCServer(grpcAddress)
+		err := foo.StartFooGRPCServer(grpcAddress)
 		if err != nil {
 			logger.Error(err.Error(), zap.Error(err))
 		}
@@ -48,7 +48,7 @@ func main() {
 
 	// fire the REST server in a goroutine
 	go func() {
-		err := bar.StartBarRESTServer(restAddress, grpcAddress)
+		err := foo.StartFooRESTServer(restAddress, grpcAddress)
 		if err != nil {
 			logger.Error(err.Error(), zap.Error(err))
 		}

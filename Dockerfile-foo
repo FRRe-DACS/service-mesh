@@ -18,7 +18,7 @@ FROM alpine:latest
 
 WORKDIR /
 
-COPY --from=builder /workspace/foo .
+COPY --from=builder /workspace/foo/main /foo
 
 EXPOSE 8080
 EXPOSE 9090

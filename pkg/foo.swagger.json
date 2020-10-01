@@ -1,0 +1,92 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "foo.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/foos": {
+      "post": {
+        "summary": "Creates a new Foo in the system",
+        "operationId": "CreateFoo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fooCreateFooResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Foo to create",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fooFoo"
+            }
+          }
+        ],
+        "tags": [
+          "FooService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "barBar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "Id of the bar"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of the Bar"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description of the Bar"
+        }
+      },
+      "title": "Bar message"
+    },
+    "fooCreateFooResponse": {
+      "type": "object",
+      "properties": {
+        "foo": {
+          "$ref": "#/definitions/fooFoo",
+          "title": "Created bar"
+        }
+      },
+      "title": "CreateFooResponse is the response after creating a Foo"
+    },
+    "fooFoo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "Id of the bar"
+        },
+        "bar": {
+          "$ref": "#/definitions/barBar"
+        }
+      },
+      "title": "Foo message"
+    }
+  }
+}

@@ -1,4 +1,39 @@
 syntax = 'proto3';
 
-option go_package = "dacs/foo";
 package ar.edu.utn.frre.dacs.foo;
+
+option go_package = "dacs/foo";
+
+import "google/api/annotations.proto";
+import "bar.proto";
+
+// Foo message
+message Foo {
+    // Id of the bar
+  int64 id = 1;
+
+  ar.edu.utn.frre.dacs.bar.Bar bar = 2;
+}
+
+// FooService handles bars in the system
+service FooService {
+  // Creates a new Foo in the system
+  rpc CreateFoo(CreateFooRequest) returns (CreateFooResponse) {
+    option (google.api.http) = {
+      post: "/v1/foos"
+      body: "foo"
+    };
+  }
+}
+
+// CreateFooRequest is a request for creating a Foo
+message CreateFooRequest {
+  // Foo to create
+  Foo foo = 1;
+}
+
+// CreateFooResponse is the response after creating a Foo
+message CreateFooResponse {
+  // Created bar
+  Foo foo = 1;
+}
