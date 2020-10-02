@@ -27,7 +27,7 @@ kubectl apply -f deploy/service-mesh.yaml
 kubectl delete -f deploy/service-mesh.yaml
 kubectl label namespace default istio-injection-
 kubectl delete -f ${ISTIO_HOME}/samples/addons -n istio-system --ignore-not-found
-istioctl --set profile=demo manifest generate | kubectl delete -f --ignore-not-found -
+istioctl --set profile=demo manifest generate | kubectl delete --ignore-not-found -f -
 ```
 
 ## Istioclt Dashboard
