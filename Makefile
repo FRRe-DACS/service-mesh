@@ -6,13 +6,13 @@ DOCKER_REPO    := docker.io/frredacs
 BAR_OUT        := "bar"
 BAR_PB_FILE    := $(CURDIR)/pb/bar.proto
 BAR_PB_OUTPUT  := $(CURDIR)/pkg/
-BAR_DOCKERFILE := Dockerfile-bar
+BAR_DOCKERFILE := bar.Dockerfile
 BAR_TAG        := ${DOCKER_REPO}/bar:${MESH_VERSION}
 
 FOO_OUT        := "foo"
 FOO_PB_FILE    := $(CURDIR)/pb/foo.proto
 FOO_PB_OUTPUT  := $(CURDIR)/pkg/
-FOO_DOCKERFILE := Dockerfile-foo
+FOO_DOCKERFILE := foo.Dockerfile
 FOO_TAG        := ${DOCKER_REPO}/foo:${MESH_VERSION}
 
 .PHONY: all bar-api build-bar

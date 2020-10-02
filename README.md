@@ -13,6 +13,10 @@ grpcurl -d '{"foo":{"id": 2,"bar":{"id": 2,"name":"Hello","description": "Hello"
   -plaintext localhost:9091 ar.edu.utn.frre.dacs.foo.FooService/CreateFoo
 ```
 
+```console
+curl --location --request GET 'localhost:8080/v1/bars'
+```
+
 ## Clean up no Serive Mesh
 
 ```console
